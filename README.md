@@ -2,15 +2,12 @@
 
 Where does a penguin keep its cryptocurrency? In their cold wallet.  A cryptocurrency tracking app utilizing Material and Cupertino widgets to customize the UI per platform.
 
-## Getting Started
+## Project Topics
+- Material DropdownButton Widget
+- Dart loops
+- Cupertino Widgets
+- Platform specific UI
 
-This project is a starting point for a Flutter application.
+This is a companion project to The App Brewery's Complete Flutter Development Bootcamp, check out the full course at www.appbrewery.co
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+*Project recreated from https://github.com/londonappbrewery/bitcoin-ticker-flutter to update to most recent Flutter version.
