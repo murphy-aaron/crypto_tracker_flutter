@@ -12,7 +12,8 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
 
-  double btcPrice = 0.00;
+  String currencyCode = 'USD';
+  double btcPrice = -1.00;
   CoinData data = CoinData();
 
   @override
@@ -23,11 +24,11 @@ class _PriceScreenState extends State<PriceScreen> {
 
   void updateUI() async {
 
-    var coinData = await data.getCoinData();
+    var coinData = await data.getCoinData(currencyCode);
 
     setState(() {
       if (coinData == null) {
-        btcPrice = 0.00;
+        btcPrice = -1.00;
       } else {
         btcPrice = coinData['rate'];
       }
@@ -46,7 +47,11 @@ class _PriceScreenState extends State<PriceScreen> {
     return DropdownButton(
       items: dropDownItems,
       onChanged: (value) {
-        print(value);
+        setState(() {
+          btcPrice = -1.0;
+          currencyCode = value;
+          updateUI();
+        });
       },
     );
   }
@@ -60,7 +65,11 @@ class _PriceScreenState extends State<PriceScreen> {
     return CupertinoPicker(
       itemExtent: 20,
       onSelectedItemChanged: (int value) {
-        print(value);
+        setState(() {
+          btcPrice = -1.0;
+          currencyCode = currenciesList[value];
+          updateUI();
+        });
       },
       children: pickerItems,
     );
@@ -87,7 +96,7 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 BTC = ${btcPrice.toStringAsFixed(2)} USD',
+                  '1 BTC = ${btcPrice > -1 ? btcPrice.toStringAsFixed(2) : '?'} ${currencyCode}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,

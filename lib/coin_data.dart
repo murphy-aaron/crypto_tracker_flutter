@@ -34,10 +34,10 @@ const List<String> cryptoList = [
 
 class CoinData {
 
-  Future getCoinData() async {
+  Future getCoinData(String currencyCode) async {
     Uri uri = Uri.https(
       kApiHost,
-      kApiPath,
+      kApiPath + currencyCode,
       {'apikey': kApiKey }
     );
 
