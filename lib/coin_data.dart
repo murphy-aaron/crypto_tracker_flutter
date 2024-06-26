@@ -1,3 +1,7 @@
+import 'package:crypto_tracker_flutter/utilities/constants.dart';
+import 'package:http/http.dart';
+import 'dart:convert';
+
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -28,4 +32,22 @@ const List<String> cryptoList = [
   'LTC',
 ];
 
-class CoinData {}
+class CoinData {
+
+  Future getCoinData() async {
+    Uri uri = Uri.https(
+      kApiHost,
+      kApiPath,
+      {'apikey': kApiKey }
+    );
+
+    Response response = await get(uri);
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+}
