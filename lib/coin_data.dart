@@ -35,19 +35,24 @@ const List<String> cryptoList = [
 class CoinData {
 
   Future getCoinData(String currencyCode) async {
-    Uri uri = Uri.https(
-      kApiHost,
-      kApiPath + currencyCode,
-      {'apikey': kApiKey }
-    );
 
-    Response response = await get(uri);
+    Map<String, double> prices = {};
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      print(response.statusCode);
+    for (String crypto in cryptoList) {
+      Uri uri = Uri.https(
+          kApiHost,
+          '$kApiPath$crypto/$currencyCode',
+          {'apikey': kApiKey }
+      );
+      Response response = await get(uri);
+      if (response.statusCode == 200) {
+        prices[crypto] = jsonDecode(response.body)['rate'];
+      } else {
+        print(response.statusCode);
+      }
     }
+
+    return prices;
   }
 
 }
